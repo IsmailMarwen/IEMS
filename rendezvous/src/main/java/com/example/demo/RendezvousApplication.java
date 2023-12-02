@@ -1,13 +1,13 @@
-package com.jee.TournoiFootball;
+package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TournoiFootballApplication {
+public class RendezvousApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TournoiFootballApplication.class, args);
+		SpringApplication.run(RendezvousApplication.class, args);
 	}
 
 }
