@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
+@NoArgsConstructor
 public class SauvCarton implements Serializable {
     public SauvCarton(Long idSauvCarton, int nbJaune, int nbrRouge, Match match, Joueur joueur) {
         this.idSauvCarton = idSauvCarton;

@@ -13,20 +13,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class Equipe implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEquipe;
     private String nom;
     private String logo;
-    @ManyToOne
-    private Tournoi tournoi;
     @OneToMany(mappedBy = "eq1", fetch = FetchType.LAZY)
     private List<Match> matchesAsEq1;
 
     @OneToMany(mappedBy = "eq2", fetch = FetchType.LAZY)
     private List<Match> matchesAsEq2;
-
+    @JsonIgnore
     @OneToMany(mappedBy="equipe",fetch=FetchType.LAZY)
     private List<Joueur> joueurs;
 
@@ -52,14 +51,6 @@ public class Equipe implements Serializable{
 
     public void setLogo(String logo) {
         this.logo = logo;
-    }
-
-    public Tournoi getTournoi() {
-        return tournoi;
-    }
-
-    public void setTournoi(Tournoi tournoi) {
-        this.tournoi = tournoi;
     }
 
     public List<Match> getMatchesAsEq1() {

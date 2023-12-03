@@ -1,0 +1,79 @@
+package com.example.demo.service.impliments;
+
+import com.example.demo.persistance.dao.EquipeRepository;
+import com.example.demo.persistance.dao.JoueurRepository;
+import com.example.demo.persistance.entities.*;
+import com.example.demo.service.interfaces.IEquipe;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class EquipeService implements IEquipe {
+    @Autowired
+    private EquipeRepository equipeRepository;
+    @Autowired
+    private JoueurRepository joueurRepository;
+
+    @Override
+    public Equipe saveEquipe(Equipe equipe) {
+        return equipeRepository.save(equipe);
+    }
+
+    @Override
+    public Equipe saveEquipeWithJoueurs(Equipe equipe, List<Long> joueurIds) {
+        Equipe savedEquipe = equipeRepository.save(equipe);
+        List<Joueur> joueurs = joueurRepository.findAllById(joueurIds);
+        List<Joueur> playersWithOtherTeam = joueurs.stream().filter(joueur -> joueur.getEquipe() != null).collect(Collectors.toList());
+        if (!playersWithOtherTeam.isEmpty()) {
+            throw new RuntimeException("One or more players are already associated with another team.");
+        }
+        for (Joueur joueur : joueurs) {
+            joueur.setEquipe(savedEquipe);
+            joueurRepository.save(joueur);
+        }
+        savedEquipe.setJoueurs(joueurs);
+        equipeRepository.save(savedEquipe);
+
+        return savedEquipe;
+    }
+
+
+    @Override
+    public Equipe updateEquipe(Equipe equipe) {
+        return equipeRepository.saveAndFlush(equipe);
+    }
+
+    @Override
+    public boolean deleteEquipe(Long id) {
+      equipeRepository.deleteById(id);
+      return true;
+    }
+
+    @Override
+    public List<Equipe> getListEquipe() {
+        return equipeRepository.findAll();
+    }
+
+    @Override
+    public Equipe getEquipe(Long id) {
+        return equipeRepository.findById(id).get();
+    }
+
+    @Override
+    public Equipe findEquipeByName(String name) {
+        return equipeRepository.findByNom(name);
+    }
+
+    @Override
+    public int getNbEquipe() {
+        return equipeRepository.getNbEquipe();
+    }
+
+    @Override
+    public Equipe getEquipeById(Long id) {
+        return null;
+    }
+}

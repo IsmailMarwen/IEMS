@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class Journee implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

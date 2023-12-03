@@ -14,6 +14,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "`match`")  // Enclose the table name in backticks
 @AllArgsConstructor
+@NoArgsConstructor
 public class Match implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

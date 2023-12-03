@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class Joueur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,7 @@ public class Joueur implements Serializable {
     @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
     private List<Carton> cartons;
     @ManyToOne
+    @JsonIgnore
     private Equipe equipe;
     @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
     private List<Butteur> butteurs;

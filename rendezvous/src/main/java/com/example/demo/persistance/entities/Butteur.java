@@ -14,6 +14,7 @@ import lombok.Setter;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class Butteur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
