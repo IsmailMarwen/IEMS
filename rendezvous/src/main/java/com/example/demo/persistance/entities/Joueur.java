@@ -20,12 +20,13 @@ public class Joueur implements Serializable {
     private String nom;
     private String image;
     @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
-    private List<Match> matchs;
+    private List<SauvCarton> sauvCartonList;
     @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
     private List<Carton> cartons;
     @ManyToOne
     private Equipe equipe;
-
+    @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
+    private List<Butteur> butteurs;
     public Long getIdJoueur() {
         return idJoueur;
     }
@@ -50,12 +51,12 @@ public class Joueur implements Serializable {
         this.image = image;
     }
 
-    public List<Match> getMatchs() {
-        return matchs;
+    public List<SauvCarton> getSauvCartonList() {
+        return sauvCartonList;
     }
 
-    public void setMatchs(List<Match> matchs) {
-        this.matchs = matchs;
+    public void setSauvCartonList(List<SauvCarton> sauvCartonList) {
+        this.sauvCartonList = sauvCartonList;
     }
 
     public List<Carton> getCartons() {
@@ -72,5 +73,13 @@ public class Joueur implements Serializable {
 
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
+    }
+
+    public List<Butteur> getButteurs() {
+        return butteurs;
+    }
+
+    public void setButteurs(List<Butteur> butteurs) {
+        this.butteurs = butteurs;
     }
 }

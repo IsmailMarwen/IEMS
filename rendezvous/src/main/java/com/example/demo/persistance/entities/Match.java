@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
+@Table(name = "`match`")  // Enclose the table name in backticks
 @AllArgsConstructor
 public class Match implements Serializable {
     @Id
@@ -27,8 +28,7 @@ public class Match implements Serializable {
     @ManyToOne
     private Journee journee;
 
-    @OneToMany(mappedBy="match",fetch=FetchType.LAZY)
-    private List<Carton> cartons;
+
     @OneToMany(mappedBy="match",fetch=FetchType.LAZY)
     private List<SauvCarton> sauvcartons;
 
@@ -89,14 +89,6 @@ public class Match implements Serializable {
 
     public void setJournee(Journee journee) {
         this.journee = journee;
-    }
-
-    public List<Carton> getCartons() {
-        return cartons;
-    }
-
-    public void setCartons(List<Carton> cartons) {
-        this.cartons = cartons;
     }
 
     public List<SauvCarton> getSauvcartons() {

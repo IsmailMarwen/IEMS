@@ -12,8 +12,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
-@AllArgsConstructor
 public class SauvCarton implements Serializable {
+    public SauvCarton(Long idSauvCarton, int nbJaune, int nbrRouge, Match match, Joueur joueur) {
+        this.idSauvCarton = idSauvCarton;
+        this.nbJaune = nbJaune;
+        this.nbrRouge = nbrRouge;
+        this.match = match;
+        this.joueur = joueur;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSauvCarton;

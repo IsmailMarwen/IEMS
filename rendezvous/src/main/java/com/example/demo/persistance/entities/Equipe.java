@@ -21,8 +21,11 @@ public class Equipe implements Serializable{
     private String logo;
     @ManyToOne
     private Tournoi tournoi;
-    @OneToMany(mappedBy="equipe",fetch=FetchType.LAZY)
-    private List<Match> matchs;
+    @OneToMany(mappedBy = "eq1", fetch = FetchType.LAZY)
+    private List<Match> matchesAsEq1;
+
+    @OneToMany(mappedBy = "eq2", fetch = FetchType.LAZY)
+    private List<Match> matchesAsEq2;
 
     @OneToMany(mappedBy="equipe",fetch=FetchType.LAZY)
     private List<Joueur> joueurs;
@@ -59,12 +62,20 @@ public class Equipe implements Serializable{
         this.tournoi = tournoi;
     }
 
-    public List<Match> getMatchs() {
-        return matchs;
+    public List<Match> getMatchesAsEq1() {
+        return matchesAsEq1;
     }
 
-    public void setMatchs(List<Match> matchs) {
-        this.matchs = matchs;
+    public void setMatchesAsEq1(List<Match> matchesAsEq1) {
+        this.matchesAsEq1 = matchesAsEq1;
+    }
+
+    public List<Match> getMatchesAsEq2() {
+        return matchesAsEq2;
+    }
+
+    public void setMatchesAsEq2(List<Match> matchesAsEq2) {
+        this.matchesAsEq2 = matchesAsEq2;
     }
 
     public List<Joueur> getJoueurs() {

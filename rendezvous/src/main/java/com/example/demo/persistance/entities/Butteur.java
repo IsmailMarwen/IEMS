@@ -19,9 +19,8 @@ public class Butteur implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idButteur;
     private int nbBut;
-    @JsonIgnore
-    @OneToMany(mappedBy="butteur",fetch=FetchType.LAZY)
-    private List<Joueur> joueurs;
+    @ManyToOne
+    private  Joueur joueur;
 
     @ManyToOne
     private Match matchs;
@@ -42,12 +41,12 @@ public class Butteur implements Serializable {
         this.nbBut = nbBut;
     }
 
-    public List<Joueur> getJoueurs() {
-        return joueurs;
+    public Joueur getJoueur() {
+        return joueur;
     }
 
-    public void setJoueurs(List<Joueur> joueurs) {
-        this.joueurs = joueurs;
+    public void setJoueur(Joueur joueur) {
+        this.joueur = joueur;
     }
 
     public Match getMatchs() {
