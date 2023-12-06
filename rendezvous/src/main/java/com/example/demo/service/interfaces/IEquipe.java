@@ -5,7 +5,7 @@ import com.example.demo.persistance.entities.Equipe;
 
 public interface IEquipe {
     Equipe saveEquipe(Equipe equipe);
-    Equipe saveEquipeWithJoueurs(Equipe equipe, List<Long> joueurIds) ;
+    Equipe saveEquipeWithJoueurs(Equipe equipe, List<Long> joueurIds);
     Equipe updateEquipe(Equipe equipe);
     boolean deleteEquipe(Long id);
     List<Equipe> getListEquipe();

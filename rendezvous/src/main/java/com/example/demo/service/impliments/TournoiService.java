@@ -48,6 +48,7 @@ public class TournoiService implements ITournoi {
             }
 
             Collections.rotate(equipes.subList(1, equipes.size()), 1);
+
         }
 
         return tournoi;

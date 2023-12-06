@@ -29,7 +29,7 @@ public class SauvCarton implements Serializable {
     private int nbrRouge;
     @ManyToOne
     private Match match;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Joueur joueur;
 
     public Long getIdSauvCarton() {

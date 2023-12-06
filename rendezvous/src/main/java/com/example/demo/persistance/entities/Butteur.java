@@ -24,7 +24,7 @@ public class Butteur implements Serializable {
     private  Joueur joueur;
 
     @ManyToOne
-    private Match matchs;
+    private Match match;
 
     public Long getIdButteur() {
         return idButteur;
@@ -51,10 +51,10 @@ public class Butteur implements Serializable {
     }
 
     public Match getMatchs() {
-        return matchs;
+        return match;
     }
 
-    public void setMatchs(Match matchs) {
-        this.matchs = matchs;
+    public void setMatch(Match matchs) {
+        this.match = matchs;
     }
 }

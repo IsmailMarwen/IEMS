@@ -107,4 +107,5 @@ public class Match implements Serializable {
     public void setEliminations(List<Elimination> eliminations) {
         this.eliminations = eliminations;
     }
+
 }

@@ -24,7 +24,7 @@ public class Joueur implements Serializable {
     private List<SauvCarton> sauvCartonList;
     @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
     private List<Carton> cartons;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Equipe equipe;
     @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
