@@ -6,7 +6,7 @@ import com.example.demo.persistance.entities.*;
 import com.example.demo.service.interfaces.IEquipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,8 +48,15 @@ public class EquipeService implements IEquipe {
 
     @Override
     public boolean deleteEquipe(Long id) {
-      equipeRepository.deleteById(id);
-      return true;
+        Optional<Equipe> equipeOptional = equipeRepository.findById(id);
+        if (equipeOptional.isPresent()) {
+            Equipe equipe = equipeOptional.get();
+            equipeRepository.deleteById(id);
+            joueurRepository.updateIdeqToNull(equipe.getIdEquipe());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

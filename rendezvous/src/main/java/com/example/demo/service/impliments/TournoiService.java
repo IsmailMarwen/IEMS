@@ -1,4 +1,5 @@
 package com.example.demo.service.impliments;
+import java.util.Optional;
 import com.example.demo.persistance.dao.*;
 import com.example.demo.persistance.entities.*;
 
@@ -52,6 +53,19 @@ public class TournoiService implements ITournoi {
         }
 
         return tournoi;
+    }
+
+    @Override
+    public boolean deleteTournoi(Long id) {
+        Optional<Tournoi> tournoiOptional = tournoiRepository.findById(id);
+        if (tournoiOptional.isPresent()) {
+            Tournoi tournoi = tournoiOptional.get();
+            tournoiRepository.deleteById(id);
+            journeeRepository.updateIdJourneeToNull(tournoi.getIdTournoi());
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

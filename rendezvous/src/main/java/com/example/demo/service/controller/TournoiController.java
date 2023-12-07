@@ -19,7 +19,12 @@ public class TournoiController {
         Tournoi createdTournoi = tournoiService.createTournoiWithJourneesAndMatches(request);
         return new ResponseEntity<>(createdTournoi, HttpStatus.CREATED);
     }
-
+    @DeleteMapping("/delete/{id}")
+    boolean delete(@PathVariable Long id) {
+        tournoiService.deleteTournoi(id);
+        System.out.println("*******deleted***********");
+        return true;
+    }
 
 
 }

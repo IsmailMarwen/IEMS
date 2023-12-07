@@ -5,4 +5,5 @@ import com.example.demo.persistance.entities.Tournoi;
 
 public interface ITournoi {
     Tournoi createTournoiWithJourneesAndMatches(CreateTournoiRequest request);
+    boolean deleteTournoi(Long id);
 }

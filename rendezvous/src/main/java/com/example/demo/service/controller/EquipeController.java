@@ -49,6 +49,7 @@ public class EquipeController {
     @DeleteMapping("/delete/{id}")
     boolean delete(@PathVariable Long id) {
         equipeService.deleteEquipe(id);
+        System.out.println("*******deleted***********");
         return true;
     }
 
