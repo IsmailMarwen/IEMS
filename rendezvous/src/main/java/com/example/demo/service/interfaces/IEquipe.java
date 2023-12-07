@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.example.demo.persistance.entities.Equipe;
 
+
 public interface IEquipe {
     Equipe saveEquipe(Equipe equipe);
     Equipe saveEquipeWithJoueurs(Equipe equipe, List<Long> joueurIds);
@@ -13,4 +14,7 @@ public interface IEquipe {
     Equipe findEquipeByName(String name);
     int getNbEquipe();
     Equipe getEquipeById(Long id);
+    boolean updateEquipe(Long id, String nom);
+    List<Equipe> getAllEquipe();
+    List<Equipe> getEquipeByTournoi(Long id);
 }

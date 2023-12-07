@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import com.example.demo.service.interfaces.ITournoi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TournoiService implements ITournoi {
@@ -67,7 +68,21 @@ public class TournoiService implements ITournoi {
             return false;
         }
     }
-
-
+    @Override
+    @Transactional
+    public boolean updateTournoi(Long id, String nom) {
+        Tournoi tournoi = tournoiRepository.findById(id).orElse(null);
+        if (tournoi != null) {
+            tournoi.setNom(nom);
+            tournoiRepository.save(tournoi);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    @Override
+    public List<Tournoi> getAllTournoi() {
+        return tournoiRepository.findAll();
+    }
 
 }

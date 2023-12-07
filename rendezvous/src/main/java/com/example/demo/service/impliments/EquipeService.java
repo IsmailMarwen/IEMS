@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import org.springframework.transaction.annotation.Transactional;
 @Service
 public class EquipeService implements IEquipe {
     @Autowired
@@ -82,5 +82,27 @@ public class EquipeService implements IEquipe {
     @Override
     public Equipe getEquipeById(Long id) {
         return null;
+    }
+
+    @Override
+    @Transactional
+    public boolean updateEquipe(Long id, String nom) {
+        Equipe equipe = equipeRepository.findById(id).orElse(null);
+        if (equipe != null) {
+            equipe.setNom(nom);
+            equipeRepository.save(equipe);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Equipe> getAllEquipe() {
+        return equipeRepository.findAll();
+    }
+    @Override
+    public List<Equipe> getEquipeByTournoi(Long id) {
+        return equipeRepository.findByTournoi(id);
     }
 }
