@@ -19,6 +19,7 @@ public class Carton implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCarton;
     private String type;
+    @JsonIgnore
     @ManyToOne
     private Joueur joueur;
 

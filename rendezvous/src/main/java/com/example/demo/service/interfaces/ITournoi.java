@@ -11,4 +11,5 @@ public interface ITournoi {
     boolean deleteTournoi(Long id);
     boolean updateTournoi(Long id, String nom);
     List<Tournoi> getAllTournoi();
+    Tournoi getTournoiById(Long idTournoi);
 }

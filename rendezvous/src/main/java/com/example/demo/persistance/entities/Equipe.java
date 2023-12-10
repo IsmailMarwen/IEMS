@@ -20,14 +20,22 @@ public class Equipe implements Serializable{
     private Long idEquipe;
     private String nom;
     private String logo;
+    @JsonIgnore
     @OneToMany(mappedBy = "eq1", fetch = FetchType.LAZY)
     private List<Match> matchesAsEq1;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "eq2", fetch = FetchType.LAZY)
     private List<Match> matchesAsEq2;
     @JsonIgnore
     @OneToMany(mappedBy="equipe",fetch=FetchType.LAZY)
     private List<Joueur> joueurs;
+    @JsonIgnore
+    @ManyToOne
+    Tournoi tournoi;
+
+    public Tournoi getTournoi() {
+        return tournoi;
+    }
 
     public Long getIdEquipe() {
         return idEquipe;

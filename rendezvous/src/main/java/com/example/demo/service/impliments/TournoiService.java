@@ -85,4 +85,10 @@ public class TournoiService implements ITournoi {
         return tournoiRepository.findAll();
     }
 
+    @Override
+    public Tournoi getTournoiById(Long idTournoi) {
+        Optional<Tournoi> optionalTournoi = tournoiRepository.findById(idTournoi);
+        return optionalTournoi.orElse(null);
+    }
+
 }

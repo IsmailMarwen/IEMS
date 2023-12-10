@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JoueurService implements IJoueur {
@@ -35,5 +36,10 @@ public class JoueurService implements IJoueur {
     @Override
     public List<Joueur> getJoueurByEquipe(Long id) {
         return joueurRepository.findByEquipe(id);
+    }
+    @Override
+    public Joueur findById(Long playerId) {
+        Optional<Joueur> joueurOptional = joueurRepository.findById(playerId);
+        return joueurOptional.get();
     }
 }

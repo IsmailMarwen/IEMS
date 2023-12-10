@@ -8,4 +8,5 @@ public interface IJoueur  {
     Joueur saveJoueur(Joueur joueur);
     boolean updateJoueur(Long id, String nom);
     List<Joueur> getJoueurByEquipe(Long id);
+    public Joueur findById(Long playerId);
 }

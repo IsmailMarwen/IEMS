@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -18,8 +19,20 @@ public class Tournoi implements Serializable {
     private String nom;
     private LocalDate dateDebut;
     private LocalDate dateFin;
+    @JsonIgnore
     @OneToMany(mappedBy="tournoi",fetch=FetchType.LAZY)
     private List<Journee> journees;
+    @JsonIgnore
+    @OneToMany(mappedBy="tournoi",fetch=FetchType.LAZY)
+    private List<Equipe> equipes;
+
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
+    }
 
     public Long getIdTournoi() {
         return idTournoi;

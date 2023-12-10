@@ -27,8 +27,10 @@ public class SauvCarton implements Serializable {
     private Long idSauvCarton;
     private int nbJaune;
     private int nbrRouge;
+    @JsonIgnore
     @ManyToOne
     private Match match;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Joueur joueur;
 

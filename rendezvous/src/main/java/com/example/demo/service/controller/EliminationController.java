@@ -22,4 +22,8 @@ public class EliminationController {
         List<Elimination> eliminations = eliminationService.getEliminationByJoueur(id);
         return eliminations ;
     }
+    @GetMapping("/nb/{id}")
+    public int getnbElim(@PathVariable Long id) {
+        return  eliminationService.getNbElimin(id);
+    }
 }

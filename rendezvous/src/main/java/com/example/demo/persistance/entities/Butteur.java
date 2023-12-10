@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -15,14 +18,17 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Butteur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idButteur;
     private int nbBut;
+    @JsonIgnoreProperties("butteurs")
     @ManyToOne
-    private  Joueur joueur;
+    private Joueur joueur;
 
+    @JsonIgnoreProperties("butteurs")
     @ManyToOne
     private Match match;
 

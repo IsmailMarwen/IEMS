@@ -18,9 +18,10 @@ public class Journee implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idJournee;
+    @JsonIgnore
     @ManyToOne
     private Tournoi tournoi;
-
+    @JsonIgnore
     @OneToMany(mappedBy="journee",fetch=FetchType.LAZY)
     private List<Match> matchs;
 

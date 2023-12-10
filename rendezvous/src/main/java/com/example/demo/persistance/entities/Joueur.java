@@ -4,14 +4,18 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
+@Table(name = "`joueur`")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Joueur implements Serializable {
@@ -20,14 +24,21 @@ public class Joueur implements Serializable {
     private Long idJoueur;
     private String nom;
     private String image;
-    @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
+    @JsonIgnoreProperties("joueur")
+    @OneToMany(mappedBy = "joueur", fetch = FetchType.LAZY)
     private List<SauvCarton> sauvCartonList;
-    @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
+
+    @JsonIgnoreProperties("joueur")
+    @OneToMany(mappedBy = "joueur", fetch = FetchType.LAZY)
     private List<Carton> cartons;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Equipe equipe;
-    @OneToMany(mappedBy="joueur",fetch=FetchType.LAZY)
+
+    @JsonBackReference
+    @JsonIgnore
+    @OneToMany(mappedBy = "joueur", fetch = FetchType.LAZY)
     private List<Butteur> butteurs;
     public Long getIdJoueur() {
         return idJoueur;
