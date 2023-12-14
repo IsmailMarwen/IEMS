@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Map;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/equipe")
 public class EquipeController {
@@ -26,6 +26,11 @@ public class EquipeController {
     @PostMapping("/saveWithJoueurs")
     Equipe saveEquipeWithJoueurs(@RequestBody EquipeWithJoueursRequest request) {
         return equipeService.saveEquipeWithJoueurs(request.getEquipe(), request.getJoueurIds());
+    }
+    @GetMapping("/sansTournoi")
+    public ResponseEntity<List<Equipe>> getEquipesSansTournoi() {
+        List<Equipe> equipes = equipeService.getEquipesSansTournoi();
+        return ResponseEntity.ok(equipes);
     }
 
 

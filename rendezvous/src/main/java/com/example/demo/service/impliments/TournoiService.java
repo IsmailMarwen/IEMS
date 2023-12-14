@@ -31,11 +31,14 @@ public class TournoiService implements ITournoi {
         // Create and save the tournament
         Tournoi tournoi = new Tournoi();
         tournoi.setNom(request.getNom());
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        tournoi.setDateDebut(LocalDate.parse(request.getDateDebut(), dateFormatter));
-        tournoi.setDateFin(LocalDate.parse(request.getDateFin(), dateFormatter));
+        tournoi.setDateDebut(request.getDateDebut());
+        tournoi.setDateFin(request.getDateFin());
         tournoi = tournoiRepository.save(tournoi);
         List<Equipe> equipes = equipeRepository.findAllById(request.getEquipeIds());
+        for (Equipe equipe : equipes) {
+            equipe.setTournoi(tournoi);
+            equipeRepository.save(equipe);
+        }
         for (int round = 0; round < equipes.size() - 1; round++) {
             Journee journee = new Journee();
             journee.setTournoi(tournoi);

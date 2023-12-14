@@ -33,7 +33,6 @@ public class Joueur implements Serializable {
     private List<Carton> cartons;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnore
     private Equipe equipe;
 
     @JsonBackReference

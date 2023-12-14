@@ -14,5 +14,5 @@ public interface JourneeRepository extends JpaRepository<Journee,Long> {
     @Modifying
     @Query("UPDATE Journee SET tournoi_id_tournoi = NULL WHERE tournoi_id_tournoi = :tournoiId")
     void updateIdJourneeToNull(@Param("tournoiId") Long tournoiId);
-
+    List<Journee> findByTournoi_IdTournoi(Long tournoiId);
 }

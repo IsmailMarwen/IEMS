@@ -18,7 +18,8 @@ public class Carton implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCarton;
-    private String type;
+    private Long nbRouge;
+    private Long nbJaune;
     @JsonIgnore
     @ManyToOne
     private Joueur joueur;
@@ -31,12 +32,20 @@ public class Carton implements Serializable{
         this.idCarton = idCarton;
     }
 
-    public String getType() {
-        return type;
+    public Long getNbRouge() {
+        return nbRouge;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNbRouge(Long nbRouge) {
+        this.nbRouge = nbRouge;
+    }
+
+    public Long getNbJaune() {
+        return nbJaune;
+    }
+
+    public void setNbJaune(Long nbJaune) {
+        this.nbJaune = nbJaune;
     }
 
     public Joueur getJoueur() {

@@ -23,4 +23,6 @@ public interface EquipeRepository extends JpaRepository<Equipe,Long> {
     List<Equipe> findAll();
     @Query(value = "SELECT * FROM Equipe WHERE tournoi_id_tournoi = :id", nativeQuery = true)
     List<Equipe> findByTournoi(@Param("id") Long id);
+
+    List<Equipe> findByTournoiIsNull();
 }

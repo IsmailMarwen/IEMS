@@ -105,4 +105,9 @@ public class EquipeService implements IEquipe {
     public List<Equipe> getEquipeByTournoi(Long id) {
         return equipeRepository.findByTournoi(id);
     }
+
+    @Override
+    public List<Equipe> getEquipesSansTournoi() {
+        return equipeRepository.findByTournoiIsNull();
+    }
 }

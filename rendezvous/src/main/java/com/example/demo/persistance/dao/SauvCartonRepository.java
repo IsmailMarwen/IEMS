@@ -11,7 +11,8 @@ public interface SauvCartonRepository extends JpaRepository<SauvCarton,Long> {
     @Modifying
     @Query("DELETE FROM SauvCarton s WHERE s.joueur = :joueur")
     void deleteByJoueur(Joueur joueur);
-    @Query("SELECT SUM(sc.nbJaune) FROM SauvCarton sc WHERE sc.joueur = :joueur")
+    @Query("SELECT COALESCE(SUM(sc.nbJaune), 0) FROM SauvCarton sc WHERE sc.joueur = :joueur")
     int countTotalYellowCardsByJoueur(@Param("joueur") Joueur joueur);
+
 
 }

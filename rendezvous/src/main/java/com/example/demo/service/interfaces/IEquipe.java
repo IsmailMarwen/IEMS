@@ -17,4 +17,5 @@ public interface IEquipe {
     boolean updateEquipe(Long id, String nom);
     List<Equipe> getAllEquipe();
     List<Equipe> getEquipeByTournoi(Long id);
+    List<Equipe> getEquipesSansTournoi();
 }

@@ -9,7 +9,7 @@ import com.example.demo.service.interfaces.IElimination;
 
 import java.util.List;
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/elimination")
 public class EliminationController {

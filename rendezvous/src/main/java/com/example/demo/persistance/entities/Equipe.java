@@ -33,6 +33,10 @@ public class Equipe implements Serializable{
     @ManyToOne
     Tournoi tournoi;
 
+    public void setTournoi(Tournoi tournoi) {
+        this.tournoi = tournoi;
+    }
+
     public Tournoi getTournoi() {
         return tournoi;
     }

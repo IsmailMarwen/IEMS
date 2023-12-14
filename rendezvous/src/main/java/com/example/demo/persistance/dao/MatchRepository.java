@@ -14,7 +14,8 @@ public interface MatchRepository extends JpaRepository<Match,Long> {
             @Param("idJournee") Long idJournee,
             @Param("equipeId") Long equipeId);
 
-
+    @Query("SELECT m FROM Match m WHERE m.eq1.idEquipe = :equipeId OR m.eq2.idEquipe = :equipeId")
+    List<Match> findMatchesByEquipeId(@Param("equipeId") Long equipeId);
 
 }
 

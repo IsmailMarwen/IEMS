@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/tournoi")
 public class TournoiController {
@@ -51,5 +51,6 @@ public class TournoiController {
     public List<Tournoi> getAllTournoi() {
         return tournoiService.getAllTournoi();
     }
+
 }
 

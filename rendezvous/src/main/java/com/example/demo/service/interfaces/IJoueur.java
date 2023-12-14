@@ -9,4 +9,7 @@ public interface IJoueur  {
     boolean updateJoueur(Long id, String nom);
     List<Joueur> getJoueurByEquipe(Long id);
     public Joueur findById(Long playerId);
+
+    public List<Joueur> getAllJoueur();
+    List<Joueur> getJoueursWithoutEquipe();
 }

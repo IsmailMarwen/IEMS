@@ -17,8 +17,8 @@ public class Tournoi implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTournoi;
     private String nom;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
+    private String dateDebut;
+    private String dateFin;
     @JsonIgnore
     @OneToMany(mappedBy="tournoi",fetch=FetchType.LAZY)
     private List<Journee> journees;
@@ -50,19 +50,19 @@ public class Tournoi implements Serializable {
         this.nom = nom;
     }
 
-    public LocalDate getDateDebut() {
+    public String getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(LocalDate dateDebut) {
+    public void setDateDebut(String dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public LocalDate getDateFin() {
+    public String getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(LocalDate dateFin) {
+    public void setDateFin(String dateFin) {
         this.dateFin = dateFin;
     }
 

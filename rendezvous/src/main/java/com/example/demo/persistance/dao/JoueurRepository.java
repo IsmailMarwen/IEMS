@@ -21,4 +21,6 @@ public interface JoueurRepository extends JpaRepository<Joueur,Long> {
     int updateNomById(Long id, String nom);
     @Query(value = "SELECT * FROM Joueur WHERE equipe_id_equipe = :id", nativeQuery = true)
     List<Joueur> findByEquipe(@Param("id") Long id);
+
+    List<Joueur> findByEquipeIsNull();
 }

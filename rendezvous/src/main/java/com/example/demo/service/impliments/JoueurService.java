@@ -42,4 +42,14 @@ public class JoueurService implements IJoueur {
         Optional<Joueur> joueurOptional = joueurRepository.findById(playerId);
         return joueurOptional.get();
     }
+
+    @Override
+    public List<Joueur> getAllJoueur() {
+        return joueurRepository.findAll();
+    }
+
+    @Override
+    public List<Joueur> getJoueursWithoutEquipe() {
+        return joueurRepository.findByEquipeIsNull();
+    }
 }

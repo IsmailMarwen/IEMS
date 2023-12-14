@@ -4,6 +4,7 @@ package com.example.demo.service.impliments;
 import com.example.demo.persistance.dao.*;
 import com.example.demo.persistance.entities.*;
 
+import com.example.demo.service.interfaces.IMatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,9 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class MatchService {
+public class MatchService implements IMatch {
 
     @Autowired
     private MatchRepository matchRepository;
@@ -43,7 +45,7 @@ public class MatchService {
                 .orElseThrow(() -> new EntityNotFoundException("Match not found"));
         match.setScore1(updateRequest.getScore1());
         match.setScore2(updateRequest.getScore2());
-        match.setFinished(updateRequest.isFinished());
+        match.setFinished(true);
         updatePlayers(match, updateRequest);
         prepareEliminations(match);
         matchRepository.save(match);
@@ -56,8 +58,17 @@ public class MatchService {
         }
 
         for (Carton carton : updateRequest.getCartons()) {
-            carton.setJoueur(carton.getJoueur());
-            cartonRepository.save(carton);
+
+            Carton existingCarton = cartonRepository.findByJoueurId(carton.getJoueur().getIdJoueur());
+
+            if (existingCarton != null) {
+                existingCarton.setNbRouge(existingCarton.getNbRouge()+carton.getNbRouge());
+                existingCarton.setNbJaune(existingCarton.getNbRouge()+carton.getNbRouge());
+                cartonRepository.save(existingCarton);
+            } else {
+                carton.setJoueur(carton.getJoueur());
+                cartonRepository.save(carton);
+            }
         }
 
         for (SauvCarton sauvCarton : updateRequest.getSauvCartons()) {
@@ -111,4 +122,30 @@ public class MatchService {
         }
     }
 
+    @Override
+    public List<Match> getMatchesByEquipe(Long idEquipe) {
+        return matchRepository.findMatchesByEquipeId(idEquipe);
+    }
+
+    @Override
+    public List<Joueur> getJoueursMatchs(Long idMatch) {
+        Match match = matchRepository.findById(idMatch).orElse(null);
+
+        if (match != null) {
+
+            List<Elimination> eliminations = eliminationRepository.findByMatch(match);
+            List<Joueur> joueursNonElimines = match.getEq1().getJoueurs().stream()
+                    .filter(joueur -> eliminations.stream().noneMatch(elimination -> elimination.getJoueur().equals(joueur)))
+                    .collect(Collectors.toList());
+
+            joueursNonElimines.addAll(match.getEq2().getJoueurs().stream()
+                    .filter(joueur -> eliminations.stream().noneMatch(elimination -> elimination.getJoueur().equals(joueur)))
+                    .collect(Collectors.toList()));
+
+            return joueursNonElimines;
+        }
+
+        return null;
+    }
 }
+

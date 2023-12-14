@@ -11,10 +11,10 @@ import com.example.demo.service.interfaces.IJoueur;
 
 import java.util.List;
 import java.util.Map;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/joueur")
-public class JoueurCintroller {
+public class JoueurController {
     @Autowired
     IJoueur joueurService;
 
@@ -47,5 +47,13 @@ public class JoueurCintroller {
     public List<Joueur> getJoueurByEquipe(@PathVariable Long id) {
         List<Joueur> joueurs = joueurService.getJoueurByEquipe(id);
         return joueurs;
+    }
+    @GetMapping("/all")
+    public List<Joueur> getAllJoueurs(){
+        return joueurService.getAllJoueur();
+    }
+    @GetMapping("/withoutEquipe")
+    public List<Joueur> getJoueursWithoutEquipe() {
+        return joueurService.getJoueursWithoutEquipe();
     }
 }
