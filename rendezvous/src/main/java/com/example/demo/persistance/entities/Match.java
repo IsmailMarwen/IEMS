@@ -38,9 +38,19 @@ public class Match implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="match",fetch=FetchType.LAZY)
     private List<Elimination> eliminations;
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "match", fetch = FetchType.LAZY)
+    private List<Butteur> butteurs;
     public Long getIdMatch() {
         return idMatch;
+    }
+
+    public List<Butteur> getButteurs() {
+        return butteurs;
+    }
+
+    public void setButteurs(List<Butteur> butteurs) {
+        this.butteurs = butteurs;
     }
 
     public void setIdMatch(Long idMatch) {
