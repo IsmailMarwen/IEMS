@@ -26,21 +26,10 @@ public class JoueurController {
     }
 
     //update
-    @PutMapping("/{id}/update")
-    public ResponseEntity<String> updateJoueurNom(@PathVariable Long id, @RequestBody Map<String, String> requestBody) {
-        String nom = requestBody.get("nom");
-
-        if (nom != null) {
-            boolean miseAJourReussie = joueurService.updateJoueur(id, nom);
-
-            if (miseAJourReussie) {
-                return new ResponseEntity<>("Mise à jour réussie", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Équipe non trouvée", HttpStatus.NOT_FOUND);
-            }
-        } else {
-            return new ResponseEntity<>("Le paramètre 'nom' est manquant", HttpStatus.BAD_REQUEST);
-        }
+    @PutMapping("/update")
+    public Joueur updateJoueurNom(@RequestBody Joueur joueur) {
+        joueurService.updateJoueur(joueur);
+        return joueur;
     }
 
     @GetMapping("/joueurbyEquipe/{id}")
@@ -55,5 +44,9 @@ public class JoueurController {
     @GetMapping("/withoutEquipe")
     public List<Joueur> getJoueursWithoutEquipe() {
         return joueurService.getJoueursWithoutEquipe();
+    }
+    @GetMapping("/{idJoueur}")
+    public Joueur getJoueur(@PathVariable long idJoueur){
+        return  joueurService.findById(idJoueur);
     }
 }

@@ -24,11 +24,11 @@ public class Joueur implements Serializable {
     private Long idJoueur;
     private String nom;
     private String image;
-    @JsonIgnoreProperties("joueur")
+    @JsonIgnore
     @OneToMany(mappedBy = "joueur", fetch = FetchType.LAZY)
     private List<SauvCarton> sauvCartonList;
 
-    @JsonIgnoreProperties("joueur")
+    @JsonIgnore
     @OneToMany(mappedBy = "joueur", fetch = FetchType.LAZY)
     private List<Carton> cartons;
 

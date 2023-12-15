@@ -17,7 +17,7 @@ public class SauvCarton implements Serializable {
     public SauvCarton(Long idSauvCarton, int nbJaune, int nbrRouge, Match match, Joueur joueur) {
         this.idSauvCarton = idSauvCarton;
         this.nbJaune = nbJaune;
-        this.nbrRouge = nbrRouge;
+        this.nbRouge = nbrRouge;
         this.match = match;
         this.joueur = joueur;
     }
@@ -26,11 +26,10 @@ public class SauvCarton implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSauvCarton;
     private int nbJaune;
-    private int nbrRouge;
+    private int nbRouge;
     @JsonIgnore
     @ManyToOne
     private Match match;
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Joueur joueur;
 
@@ -51,11 +50,11 @@ public class SauvCarton implements Serializable {
     }
 
     public int getNbrRouge() {
-        return nbrRouge;
+        return nbRouge;
     }
 
     public void setNbrRouge(int nbrRouge) {
-        this.nbrRouge = nbrRouge;
+        this.nbRouge = nbrRouge;
     }
 
     public Match getMatch() {

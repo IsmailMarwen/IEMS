@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface IJoueur  {
     Joueur saveJoueur(Joueur joueur);
-    boolean updateJoueur(Long id, String nom);
+    boolean updateJoueur(Joueur joueur);
     List<Joueur> getJoueurByEquipe(Long id);
     public Joueur findById(Long playerId);
 
     public List<Joueur> getAllJoueur();
     List<Joueur> getJoueursWithoutEquipe();
+    Boolean deleteJoueur(Long idJoueur );
+
 }

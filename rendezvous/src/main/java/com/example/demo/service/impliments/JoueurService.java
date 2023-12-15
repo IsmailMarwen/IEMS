@@ -22,15 +22,9 @@ public class JoueurService implements IJoueur {
 
     @Override
     @Transactional
-    public boolean updateJoueur(Long id, String nom) {
-        Joueur joueur = joueurRepository.findById(id).orElse(null);
-        if (joueur != null) {
-            joueur.setNom(nom);
-            joueurRepository.save(joueur);
-            return true;
-        } else {
-            return false;
-        }
+    public boolean updateJoueur(Joueur joueur) {
+        joueurRepository.saveAndFlush(joueur);
+        return true;
     }
 
     @Override
@@ -52,4 +46,10 @@ public class JoueurService implements IJoueur {
     public List<Joueur> getJoueursWithoutEquipe() {
         return joueurRepository.findByEquipeIsNull();
     }
+
+    @Override
+    public Boolean deleteJoueur(Long idJoueur) {
+        return null;
+    }
+
 }

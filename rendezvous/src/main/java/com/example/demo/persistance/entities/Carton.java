@@ -20,8 +20,7 @@ public class Carton implements Serializable{
     private Long idCarton;
     private Long nbRouge;
     private Long nbJaune;
-    @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Joueur joueur;
 
     public Long getIdCarton() {

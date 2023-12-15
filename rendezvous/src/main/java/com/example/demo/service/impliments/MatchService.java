@@ -56,20 +56,25 @@ public class MatchService implements IMatch {
             butteur.setMatch(match);
             butteurRepository.save(butteur);
         }
-
         for (Carton carton : updateRequest.getCartons()) {
+            if (carton.getJoueur() != null) {
+                Carton existingCarton = cartonRepository.findByJoueurId(carton.getJoueur().getIdJoueur());
 
-            Carton existingCarton = cartonRepository.findByJoueurId(carton.getJoueur().getIdJoueur());
-
-            if (existingCarton != null) {
-                existingCarton.setNbRouge(existingCarton.getNbRouge()+carton.getNbRouge());
-                existingCarton.setNbJaune(existingCarton.getNbRouge()+carton.getNbRouge());
-                cartonRepository.save(existingCarton);
+                if (existingCarton != null) {
+                    System.out.println("hello");
+                    existingCarton.setNbJaune(existingCarton.getNbJaune()+carton.getNbJaune());
+                    existingCarton.setNbRouge(existingCarton.getNbRouge()+carton.getNbRouge());
+                    cartonRepository.save(existingCarton);
+                } else {
+                    carton.setJoueur(carton.getJoueur());
+                    cartonRepository.save(carton);
+                }
             } else {
                 carton.setJoueur(carton.getJoueur());
                 cartonRepository.save(carton);
             }
         }
+
 
         for (SauvCarton sauvCarton : updateRequest.getSauvCartons()) {
             sauvCarton.setMatch(match);
@@ -92,8 +97,7 @@ public class MatchService implements IMatch {
                 Long joueurId = sauvCarton.getJoueur().getIdJoueur();
                 Long equipeId = joueurRepository.findEquipeIdByJoueurId(joueurId);
                 Long opposingTeamId = getOpposingTeamId(match, equipeId);
-                System.out.println("Opposing Team ID: " + opposingTeamId);
-                System.out.println("Query: " + ((org.hibernate.jpa.QueryHints.HINT_READONLY)));
+
 
                 List<Match> nextMatches = matchRepository.findByJourneeIdJourneeAndEq1IdEquipeOrEq2IdEquipe(
                         nextJournee.getIdJournee(), equipeId);
