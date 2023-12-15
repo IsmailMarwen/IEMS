@@ -1,6 +1,7 @@
 package com.example.demo.service.controller;
 import com.example.demo.persistance.dao.CreateTournoiRequest;
 
+import com.example.demo.persistance.entities.Joueur;
 import com.example.demo.persistance.entities.Tournoi;
 import com.example.demo.service.interfaces.ITournoi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +31,10 @@ public class TournoiController {
         return true;
     }
     //update
-    @PutMapping("/{id}/update")
-    public ResponseEntity<String> updateTournoiNom(@PathVariable Long id, @RequestBody Map<String, String> requestBody) {
-        String nom = requestBody.get("nom");
-
-        if (nom != null) {
-            boolean miseAJourReussie = tournoiService.updateTournoi(id, nom);
-
-            if (miseAJourReussie) {
-                return new ResponseEntity<>("Mise à jour réussie", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Équipe non trouvée", HttpStatus.NOT_FOUND);
-            }
-        } else {
-            return new ResponseEntity<>("Le paramètre 'nom' est manquant", HttpStatus.BAD_REQUEST);
-        }
+    @PutMapping("/update")
+    public Tournoi updateTournoi(@RequestBody Tournoi tournoi) {
+        tournoiService.updateTournoi(tournoi);
+        return tournoi;
     }
     //all
     @GetMapping("/all")

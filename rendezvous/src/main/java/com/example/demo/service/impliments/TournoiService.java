@@ -73,15 +73,9 @@ public class TournoiService implements ITournoi {
     }
     @Override
     @Transactional
-    public boolean updateTournoi(Long id, String nom) {
-        Tournoi tournoi = tournoiRepository.findById(id).orElse(null);
-        if (tournoi != null) {
-            tournoi.setNom(nom);
-            tournoiRepository.save(tournoi);
-            return true;
-        } else {
-            return false;
-        }
+    public boolean updateTournoi(Tournoi tournoi) {
+        tournoiRepository.saveAndFlush(tournoi);
+        return true;
     }
     @Override
     public List<Tournoi> getAllTournoi() {

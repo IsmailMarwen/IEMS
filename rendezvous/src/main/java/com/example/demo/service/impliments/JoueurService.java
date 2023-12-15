@@ -57,7 +57,7 @@ public class JoueurService implements IJoueur {
         if (joueurOptional.isPresent()) {
             Joueur joueur = joueurOptional.get();
             joueurRepository.deleteById(idJoueur);
-       
+
             return true;
         } else {
             return false;

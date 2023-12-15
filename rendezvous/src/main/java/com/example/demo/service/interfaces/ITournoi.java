@@ -9,7 +9,7 @@ import java.util.List;
 public interface ITournoi {
     Tournoi createTournoiWithJourneesAndMatches(CreateTournoiRequest request);
     boolean deleteTournoi(Long id);
-    boolean updateTournoi(Long id, String nom);
+    boolean updateTournoi(Tournoi tournoi);
     List<Tournoi> getAllTournoi();
     Tournoi getTournoiById(Long idTournoi);
 }
