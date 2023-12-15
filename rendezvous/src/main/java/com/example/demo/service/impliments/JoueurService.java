@@ -1,6 +1,8 @@
 package com.example.demo.service.impliments;
 
 import com.example.demo.persistance.dao.JoueurRepository;
+import com.example.demo.persistance.dao.EquipeRepository;
+import com.example.demo.persistance.entities.Equipe;
 import com.example.demo.persistance.entities.Joueur;
 
 import com.example.demo.service.interfaces.IJoueur;
@@ -15,6 +17,8 @@ import java.util.Optional;
 public class JoueurService implements IJoueur {
     @Autowired
     private JoueurRepository joueurRepository;
+    @Autowired
+    private EquipeRepository equipeRepository;
     @Override
     public Joueur saveJoueur(Joueur joueur) {
         return joueurRepository.save(joueur);
@@ -49,7 +53,16 @@ public class JoueurService implements IJoueur {
 
     @Override
     public Boolean deleteJoueur(Long idJoueur) {
-        return null;
+        Optional<Joueur> joueurOptional = joueurRepository.findById(idJoueur);
+        if (joueurOptional.isPresent()) {
+            Joueur joueur = joueurOptional.get();
+            joueurRepository.deleteById(idJoueur);
+       
+            return true;
+        } else {
+            return false;
+        }
     }
+
 
 }

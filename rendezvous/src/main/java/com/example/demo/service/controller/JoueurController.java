@@ -49,4 +49,11 @@ public class JoueurController {
     public Joueur getJoueur(@PathVariable long idJoueur){
         return  joueurService.findById(idJoueur);
     }
+    @DeleteMapping("/delete/{id}")
+    boolean delete(@PathVariable Long id) {
+        joueurService.deleteJoueur(id);
+        System.out.println("*******deleted***********");
+        return true;
+    }
+    //u
 }
