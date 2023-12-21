@@ -27,5 +27,10 @@ public class EliminationService implements IElimination {
         return eliminationRepository.countEliminationsByJoueurId(idJoueur);
     }
 
+    @Override
+    public List<Elimination> getEliminationByMacth(Long id) {
+        return eliminationRepository.findByIdMatch(id);
+    }
+
 
 }

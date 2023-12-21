@@ -15,4 +15,5 @@ public interface TournoiRepository extends JpaRepository<Tournoi,Long> {
     @Transactional
     int updateNomById(Long id, String nom);
     List<Tournoi> findAll();
+
 }

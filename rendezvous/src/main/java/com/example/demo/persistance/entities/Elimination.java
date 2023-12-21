@@ -18,10 +18,10 @@ public class Elimination implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idElimination;
-    @JsonIgnore
+
     @ManyToOne
     private Match match;
-    @JsonIgnore
+
     @OneToOne
     private Joueur joueur;
 

@@ -12,4 +12,5 @@ public interface ITournoi {
     boolean updateTournoi(Tournoi tournoi);
     List<Tournoi> getAllTournoi();
     Tournoi getTournoiById(Long idTournoi);
+
 }

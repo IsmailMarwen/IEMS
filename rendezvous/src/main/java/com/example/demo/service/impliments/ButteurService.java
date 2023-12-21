@@ -1,6 +1,8 @@
 package com.example.demo.service.impliments;
 
 import com.example.demo.persistance.dao.ButteurRepository;
+import com.example.demo.persistance.dao.ClassementButeur;
+import com.example.demo.persistance.dao.ClassementDTO;
 import com.example.demo.persistance.entities.Butteur;
 import com.example.demo.persistance.entities.Joueur;
 import com.example.demo.persistance.entities.Tournoi;
@@ -14,8 +16,8 @@ public class ButteurService implements IButteur {
     @Autowired
     private ButteurRepository butteurRepository;
     @Override
-    public List<Butteur> getClassementButeursParTournoi(Tournoi tournoi) {
-        return butteurRepository.findByMatch_Journee_TournoiOrderByNbButDesc(tournoi);
+    public List<ClassementButeur> getClassementButeursByTournoi(Long tournoiId) {
+        return butteurRepository.findClassementButeursByTournoi(tournoiId);
     }
 
     @Override

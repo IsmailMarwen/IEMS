@@ -20,10 +20,10 @@ public class Tournoi implements Serializable {
     private String dateDebut;
     private String dateFin;
     @JsonIgnore
-    @OneToMany(mappedBy="tournoi",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="tournoi",fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Journee> journees;
     @JsonIgnore
-    @OneToMany(mappedBy="tournoi",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="tournoi",fetch=FetchType.LAZY )
     private List<Equipe> equipes;
 
     public List<Equipe> getEquipes() {

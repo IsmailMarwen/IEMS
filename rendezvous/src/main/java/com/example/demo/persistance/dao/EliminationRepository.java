@@ -22,4 +22,6 @@ public interface EliminationRepository extends JpaRepository<Elimination,Long> {
     int countEliminationsByJoueurId(@Param("joueurId") Long joueurId);
 
     List<Elimination> findByMatch(Match match);
+    @Query(value = "SELECT * FROM Elimination where match_id_match=:idMatch",nativeQuery = true)
+    List<Elimination> findByIdMatch(@Param("idMatch") Long idMatch);
 }

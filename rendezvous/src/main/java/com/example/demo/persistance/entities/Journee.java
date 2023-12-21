@@ -19,10 +19,10 @@ public class Journee implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idJournee;
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Tournoi tournoi;
     @JsonIgnore
-    @OneToMany(mappedBy="journee",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="journee",fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Match> matchs;
 
     public Long getIdJournee() {

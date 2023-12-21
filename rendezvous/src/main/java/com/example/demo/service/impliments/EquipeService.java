@@ -2,6 +2,7 @@ package com.example.demo.service.impliments;
 
 import com.example.demo.persistance.dao.EquipeRepository;
 import com.example.demo.persistance.dao.JoueurRepository;
+import com.example.demo.persistance.dao.MatchRepository;
 import com.example.demo.persistance.entities.*;
 import com.example.demo.service.interfaces.IEquipe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,15 @@ import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.transaction.annotation.Transactional;
+@Transactional
 @Service
 public class EquipeService implements IEquipe {
     @Autowired
     private EquipeRepository equipeRepository;
     @Autowired
     private JoueurRepository joueurRepository;
+    @Autowired
+    private MatchRepository matchRepository;
 
     @Override
     public Equipe saveEquipe(Equipe equipe) {
@@ -51,8 +55,13 @@ public class EquipeService implements IEquipe {
         Optional<Equipe> equipeOptional = equipeRepository.findById(id);
         if (equipeOptional.isPresent()) {
             Equipe equipe = equipeOptional.get();
-            equipeRepository.deleteById(id);
+
+            matchRepository.deleteByEq1OrEq2(equipe);
+
             joueurRepository.updateIdeqToNull(equipe.getIdEquipe());
+
+            equipeRepository.deleteById(id);
+
             return true;
         } else {
             return false;

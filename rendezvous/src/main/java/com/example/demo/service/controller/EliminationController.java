@@ -26,4 +26,8 @@ public class EliminationController {
     public int getnbElim(@PathVariable Long id) {
         return  eliminationService.getNbElimin(id);
     }
+    @GetMapping("/match/{idMatch}")
+    public List<Elimination> getElimMatch(@PathVariable Long idMatch){
+        return  eliminationService.getEliminationByMacth(idMatch);
+    }
 }

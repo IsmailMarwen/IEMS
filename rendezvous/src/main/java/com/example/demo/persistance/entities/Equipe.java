@@ -21,16 +21,16 @@ public class Equipe implements Serializable{
     private String nom;
     private String logo;
     @JsonIgnore
-    @OneToMany(mappedBy = "eq1", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "eq1", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Match> matchesAsEq1;
     @JsonIgnore
-    @OneToMany(mappedBy = "eq2", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "eq2", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Match> matchesAsEq2;
     @JsonIgnore
     @OneToMany(mappedBy="equipe",fetch=FetchType.LAZY)
     private List<Joueur> joueurs;
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     Tournoi tournoi;
 
     public void setTournoi(Tournoi tournoi) {

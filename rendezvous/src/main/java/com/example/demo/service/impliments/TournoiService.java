@@ -11,7 +11,7 @@ import com.example.demo.service.interfaces.ITournoi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+@Transactional
 @Service
 public class TournoiService implements ITournoi {
 
@@ -64,13 +64,18 @@ public class TournoiService implements ITournoi {
         Optional<Tournoi> tournoiOptional = tournoiRepository.findById(id);
         if (tournoiOptional.isPresent()) {
             Tournoi tournoi = tournoiOptional.get();
+
             tournoiRepository.deleteById(id);
-            journeeRepository.updateIdJourneeToNull(tournoi.getIdTournoi());
+
+            List<Journee> journees = journeeRepository.findByTournoi(tournoi);
+            journeeRepository.deleteAll(journees);
+            equipeRepository.updateTournoiToNull(tournoi);
             return true;
         } else {
             return false;
         }
     }
+
     @Override
     @Transactional
     public boolean updateTournoi(Tournoi tournoi) {

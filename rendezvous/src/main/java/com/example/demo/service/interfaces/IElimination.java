@@ -10,4 +10,5 @@ public interface IElimination {
 
     List<Elimination> getEliminationByJoueur(Long id);
     public int getNbElimin(Long idJoueur);
+    List<Elimination> getEliminationByMacth(Long id);
 }

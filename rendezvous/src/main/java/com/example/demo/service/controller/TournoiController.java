@@ -41,6 +41,10 @@ public class TournoiController {
     public List<Tournoi> getAllTournoi() {
         return tournoiService.getAllTournoi();
     }
+    @GetMapping("/{id}")
+    Tournoi getTournoi(@PathVariable Long id){
+        return  tournoiService.getTournoiById(id);
+    }
 
 }
 

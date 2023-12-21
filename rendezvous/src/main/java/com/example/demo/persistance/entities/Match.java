@@ -22,10 +22,8 @@ public class Match implements Serializable {
     private int score1;
     private int score2;
     private boolean finished;
-    @JsonIgnore
     @ManyToOne
     private Equipe eq1;
-    @JsonIgnore
     @ManyToOne
     private Equipe eq2;
     @JsonIgnore
@@ -33,14 +31,15 @@ public class Match implements Serializable {
     private Journee journee;
 
     @JsonIgnore
-    @OneToMany(mappedBy="match",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="match",fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     private List<SauvCarton> sauvcartons;
     @JsonIgnore
-    @OneToMany(mappedBy="match",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="match",fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Elimination> eliminations;
     @JsonIgnore
-    @OneToMany(mappedBy = "match", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "match", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Butteur> butteurs;
+
     public Long getIdMatch() {
         return idMatch;
     }
